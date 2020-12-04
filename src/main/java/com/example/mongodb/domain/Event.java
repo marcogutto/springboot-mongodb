@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 
 @Document
-@CompoundIndexes({ @CompoundIndex(name = "email_age", def = "{'uid': 1, 'contact.uid' : 1, 'message.type': 1, 'message.body.text': 1}") })
+@CompoundIndexes({ @CompoundIndex(name = "uid_message", def = "{'uid': 1, 'contact.uid' : 1, 'message.type': 1, 'message.body.text': 1}") })
 public class Event {
 
 	@Id
