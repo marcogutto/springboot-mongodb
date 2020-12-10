@@ -26,30 +26,31 @@ public class EventController {
 
 	@Autowired
 	private EventRepository repository;
-	
+
 	@GetMapping(path = "/{uid}")
-	public ResponseEntity<List<Event>> getAllByParameters(@PathVariable String uid){
-		
+	public ResponseEntity<List<Event>> getAllByParameters(@PathVariable String uid) {
+
 		LOGGER.info(uid);
-		
+
 		return new ResponseEntity<List<Event>>(repository.findEventsByUid(uid), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(path = "/{eventUid}/contacts/{contactUid}")
-	public ResponseEntity<List<Event>> getAllByParameters(@PathVariable String eventUid, @PathVariable String contactUid){
-		
-		LOGGER.info(eventUid +" - "+contactUid);
-		
-		return new ResponseEntity<List<Event>>(repository.findEventsByContactUid(eventUid, contactUid), HttpStatus.OK);
+	public ResponseEntity<List<Event>> getAllByParameters(@PathVariable String eventUid,
+			@PathVariable String contactUid) {
+
+		LOGGER.info(eventUid + " - " + contactUid);
+
+		return new ResponseEntity<List<Event>>(repository.findEventsByUidAndContactUid(eventUid, contactUid),
+				HttpStatus.OK);
 	}
-	
-	@PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<Event> save(@RequestBody Event event){
-		
+
+	@PostMapping(consumes = { MediaType.APPLICATION_JSON_VALUE })
+	public ResponseEntity<Event> save(@RequestBody Event event) {
+
 		LOGGER.info(event.toString());
-		
+
 		return new ResponseEntity<Event>(repository.save(event), HttpStatus.OK);
 	}
-	
-	
+
 }

@@ -9,12 +9,12 @@ import org.springframework.stereotype.Repository;
 import com.example.mongodb.domain.Event;
 
 @Repository
-public interface EventRepository extends MongoRepository<Event, String>  {
+public interface EventRepository extends MongoRepository<Event, String> {
 
 	@Query("{ 'uid' : ?0 }")
-    List<Event> findEventsByUid(String uid);
-	
+	List<Event> findEventsByUid(String uid);
+
 	@Query("{ 'uid' : ?0, 'contact.uid' : ?1 }")
-    List<Event> findEventsByContactUid(String eventUid, String contactUid);
-	
+	List<Event> findEventsByUidAndContactUid(String eventUid, String contactUid);
+
 }
